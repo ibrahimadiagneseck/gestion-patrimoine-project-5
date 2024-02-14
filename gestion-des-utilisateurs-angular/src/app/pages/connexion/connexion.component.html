@@ -1,0 +1,44 @@
+<section class="arriere-plan d-flex justify-content-center align-items-center h-100">
+  <div class="container">
+      <div class="row">
+          <div class="col-5 mx-auto">
+              <div class="card shadow bg-white border-2 border-myprimary rounded">
+                  <div class="col-12 d-flex justify-content-center my-2">
+                      <img src="../../../assets/douanes.jpeg" alt="logo" height="100px" width="140px">
+                  </div>
+                  <div class="col-12 d-flex justify-content-center">
+                      <p class="fs-5 fw-bolder">GESTION DE PATRIMOINE</p>
+                  </div>
+                  <form (ngSubmit)="loginForm.valid && validateUser(loginForm)" #loginForm="ngForm" class="card-body p-5">
+                      <div class="row">
+                          <div class="form-group d-grid gap-1 mb-4 col-12">
+                              <label class="form-label d-flex align-items-start" for="typeText">Identifiant</label>
+                              <input type="email" name="email" id="email" id="typeText" class="form-control form-control-lg border border-myprimary" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="model.email" #email="ngModel" />
+                              <span class="focus-input100"></span>
+                              <span class="text-mybrown" *ngIf="(email.touched || loginForm.submitted) && email.errors?.['required']">Error : Email is required !</span>
+                              <span class="text-mybrown" *ngIf="(email.touched || loginForm.submitted) && email.errors?.['pattern']">Error : Please provide a valid email address !</span>
+                          </div>
+                          <div class="form-group d-grid gap-1 col-12">
+                              <label class="form-label d-flex align-items-start" for="typePassword">Mot de passe</label>
+                              <input type="password" name="pwd" id="pwd" id="typePassword" class="form-control form-control-lg border border-myprimary" required [(ngModel)]="model.pwd" #pwd="ngModel" minlength="5" />
+                              <span class="focus-input100"></span>
+                              <span class="text-mybrown" *ngIf="(pwd.touched || loginForm.submitted) && pwd.errors?.['required']">Error : Password is required !</span>
+                              <span class="text-mybrown" *ngIf="(pwd.touched || loginForm.submitted) && pwd.errors?.['minlength']">Error : Password must be at least 5 characters long. !</span>
+                          </div>
+                      </div>
+                      <div class="row mt-4">
+                          <div class="col-12">
+                              <button class="btn btn-myprimary btn-md fw-bold w-100" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+                          </div>
+                      </div>
+                      <div class="row mt-4">
+                          <div class="col-12  text-end">
+                              <button type="button" class="btn btn-outline-secondary text-dark"><u>Mot de passe oublié?</u></button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
