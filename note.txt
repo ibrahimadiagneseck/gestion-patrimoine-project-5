@@ -24,9 +24,9 @@ http://localhost:8081/connexion
 
 Authorization : basic auth
 admin@esp.sn
+oumou@esp.sn
+ibrahima@esp.sn
 lOJk8OqaH3
-
-
 
 ----------------------------------------------------------------------------------------
 
