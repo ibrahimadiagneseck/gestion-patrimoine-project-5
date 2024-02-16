@@ -112,8 +112,8 @@
 
                 <div class="row g-4 mb-3">
                     <div class="col-9 mx-auto form-group">
-                        <label for="codeSection" class="form-label fw-bold">Nom unité</label>
-                        <select name="codeSection" id="codeSection" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <label for="codeUniteDouaniere" class="form-label fw-bold">Nom unité</label>
+                        <select name="codeUniteDouaniere" id="codeUniteDouaniere" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
                             <option *ngFor="let codeUniteDouaniere of uniteDouanieres" [ngValue]="codeUniteDouaniere">
                                 {{ codeUniteDouaniere.nomUniteDouaniere }}
                             </option>
