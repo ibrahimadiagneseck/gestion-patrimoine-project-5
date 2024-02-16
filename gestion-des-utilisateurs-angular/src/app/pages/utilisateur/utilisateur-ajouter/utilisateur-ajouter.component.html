@@ -12,17 +12,17 @@
                 <div class="row g-4 mb-3">
                     <div class="col-3 mx-auto form-group">
                         <label for="matriculeAgent" class="form-label fw-bold">N° matricule</label>
-                        <input id="matriculeAgent" type="text" name="matriculeAgent" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="matriculeAgent" type="text" name="matriculeAgent" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="codeAgent" class="form-label fw-bold">N° code</label>
-                        <input id="codeAgent" type="text" name="codeAgent" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="codeAgent" type="text" name="codeAgent" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
                     
                     <div class="col-3 mx-auto form-group">
                         <label for="codeCorpsAgent" class="form-label fw-bold">Corps</label>
-                        <select name="codeCorpsAgent" id="codeCorpsAgent" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <select name="codeCorpsAgent" id="codeCorpsAgent" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                             <option *ngFor="let codeCorpsAgent of corpsAgents" [ngValue]="codeCorpsAgent">
                                 {{ codeCorpsAgent.libelleCorpsAgent }}
                             </option>
@@ -31,7 +31,7 @@
 
                     <div class="col-3 mx-auto form-group">
                         <label for="codeSection" class="form-label fw-bold">Sections</label>
-                        <select name="codeSection" id="codeSection" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <select name="codeSection" id="codeSection" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                             <option *ngFor="let codeSection of sections" [ngValue]="codeSection">
                                 {{ codeSection.libelleSection }}
                             </option>
@@ -42,22 +42,22 @@
                 <div class="row g-4 mb-3">
                     <div class="col-3 mx-auto form-group">
                         <label for="firstName" class="form-label fw-bold">Prénom</label>
-                        <input id="firstName" type="text" name="firstName" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="firstName" type="text" name="firstName" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="lastName" class="form-label fw-bold">Nom</label>
-                        <input id="lastName" type="text" name="lastName" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="lastName" type="text" name="lastName" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="email" class="form-label fw-bold">Email</label>
-                        <input id="email" type="text" name="email" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="email" type="text" name="email" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="mobile" class="form-label fw-bold">Téléphone</label>
-                        <input id="mobile" type="text" name="mobile" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="mobile" type="text" name="mobile" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
                     </div> -->
 
                     <div class="col-3 mx-auto form-group">
-                        <label for="authority" class="form-label fw-bold">Secteur d'activité</label>
+                        <label for="authority" class="form-label fw-bold">Profils</label>
 
                         <input
                             *ngIf="authoritiesSelect && authoritiesSelect.length > 0"
@@ -81,6 +81,7 @@
                             required
                             class="text-input form-control shadow-none border border-mysecondary px-1 text-uppercase fw-bold"
                             value="Sélectionner"
+                            autocomplete="off"
                         >
                         <input
                             *ngIf="!(authoritiesSelect && authoritiesSelect.length > 0)"
@@ -92,18 +93,19 @@
                             required
                             class="text-input form-control shadow-none border border-mysecondary px-1 text-uppercase fw-bold"
                             value="Sélectionner"
+                            autocomplete="off"
                         >
 
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="active" class="form-label fw-bold">Activé</label>
-                        <input id="active" type="text" name="active" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="active" type="text" name="active" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
                         <label for="notLocked" class="form-label fw-bold">Bloqué</label>
-                        <input id="notLocked" type="text" name="notLocked" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <input id="notLocked" type="text" name="notLocked" required ngModel class="text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                     </div>
 
                     <div class="col-3 mx-auto form-group">
@@ -113,7 +115,7 @@
                 <div class="row g-4 mb-3">
                     <div class="col-9 mx-auto form-group">
                         <label for="codeUniteDouaniere" class="form-label fw-bold">Nom unité</label>
-                        <select name="codeUniteDouaniere" id="codeUniteDouaniere" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase">
+                        <select name="codeUniteDouaniere" id="codeUniteDouaniere" required ngModel class="form-select text-input form-control bg-mywhite border  border-myprimary px-1 text-uppercase" autocomplete="off">
                             <option *ngFor="let codeUniteDouaniere of uniteDouanieres" [ngValue]="codeUniteDouaniere">
                                 {{ codeUniteDouaniere.nomUniteDouaniere }}
                             </option>

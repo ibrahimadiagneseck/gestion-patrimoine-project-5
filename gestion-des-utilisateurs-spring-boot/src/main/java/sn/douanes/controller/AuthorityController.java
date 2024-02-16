@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.model.*;
 import sn.douanes.services.AuthorityService;
-import sn.douanes.services.SectionsService;
 
 import java.util.List;
 

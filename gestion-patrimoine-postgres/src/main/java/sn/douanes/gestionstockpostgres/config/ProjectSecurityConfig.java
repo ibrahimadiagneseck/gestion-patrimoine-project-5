@@ -51,7 +51,6 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         (requests)->requests
-                        .requestMatchers("/Authorities").hasAuthority("ADMINISTRATEUR")
 
                         .requestMatchers("/ChangementPieces").hasAuthority("ADMINISTRATEUR")
                         .requestMatchers("/AjouterChangementPiece").hasAuthority("ADMINISTRATEUR")
@@ -261,17 +260,6 @@ public class ProjectSecurityConfig {
                         .requestMatchers("/ModifierArticleBonSortie").hasAuthority("ADMINISTRATEUR")
                         .requestMatchers("/SupprimerArticleBonSortieById/*/*").hasAuthority("ADMINISTRATEUR")
 
-                        .requestMatchers("/Users").hasAuthority("ADMINISTRATEUR")
-                                .requestMatchers("/UniteDouanieres").hasAuthority("ADMINISTRATEUR")
-                                .requestMatchers("/Sections").hasAuthority("ADMINISTRATEUR")
-                                .requestMatchers("/CorpsAgents").hasAuthority("ADMINISTRATEUR")
-                        // .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
-                        // .requestMatchers("/myLoans").authenticated()
-                        // .requestMatchers("/myCards").hasRole("USER")
-                        //.requestMatchers("/user").authenticated()
-                        //.requestMatchers("/notices","/contact","/register").permitAll())
-                        .requestMatchers("/connexion").authenticated()
-                        .requestMatchers("/inscription").permitAll()
                 )
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
