@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Vehicule } from '../model/vehicule.model';
 import { Observable, of } from 'rxjs';
 import { SelectEnum } from '../enum/select-enum.enum';
 

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------------------------------------------------
 INSERT INTO "authorities" ("authority_id", "code", "name")
-VALUES ('1', 'admin', 'Administrateur'), ('2', 'csa', 'Chef Section Armement'), ('3', 'asa', 'Agent Section Armement'),
-       ('4', 'csg', 'Chef Section Garage'), ('5', 'asg', 'Agent Section Garage'), ('6', 'csm', 'Chef Section Matériel'),
-       ('7', 'asm', 'Agent Section Matériel'), ('8', 'blm', 'Chef BLM'), ('9', 'dlf', 'Directeur DLF');
+VALUES ('1', 'ADMIN', 'ADMINISTRATEUR'), ('2', 'CSA', 'CHEF SECTION ARMEMENT'), ('3', 'ASA', 'AGENT SECTION ARMEMENT'),
+       ('4', 'CSG', 'CHEF SECTION GARAGE'), ('5', 'ASG', 'AGENT SECTION GARAGE'), ('6', 'CSM', 'CHEF SECTION MATÉRIEL'),
+       ('7', 'ASM', 'AGENT SECTION MATÉRIEL'), ('8', 'BLM', 'CHEF BLM'), ('9', 'DLF', 'DIRECTEUR DLF');
 
 -------------------------------------------------------------------------------------------------------------------------
 
@@ -92,15 +92,15 @@ VALUES
 -- MOT DE PASSE : lOJk8OqaH3
 
 INSERT INTO "utilisateur" ("code_corps_agent", "code_section", "code_unite_douaniere", "is_active", "is_not_locked", "code_agent", "matricule_agent", "join_date", "last_login_date", "last_login_date_display", "utilisateur_id", "email", "first_name", "last_name", "mobile", "profile_image_url", "pwd", "role", "user_id") VALUES
-('CP1',  'SA',   '06K',   't',    't',    'D2273',    '613693H',  '2024-02-14 02:39:49.275',  NULL,   NULL,   1,  'ibrahima@esp.sn',  'Ibrahima Diagne',  'Seck', '775211787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'user', '8706757131');
+('CP1',  'SA',   '06K',   't',    't',    'D2273',    '613693H',  '2024-02-14 02:39:49.275',  NULL,   NULL,   1,  'ibrahima@esp.sn',  'Ibrahima Diagne',  'Seck', '775211787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'ROLE_USER', '8706757131');
 
 
 INSERT INTO "utilisateur" ("code_corps_agent", "code_section", "code_unite_douaniere", "is_active", "is_not_locked", "code_agent", "matricule_agent", "join_date", "last_login_date", "last_login_date_display", "utilisateur_id", "email", "first_name", "last_name", "mobile", "profile_image_url", "pwd", "role", "user_id") VALUES
-('CP2',  'SM',   '06K',   't',    't',    'D3485',    '506234B',  '2024-02-14 02:39:49.275',  NULL,   NULL,   2,  'oumou@esp.sn',  'Oumou Hawa',  'Diallo', '774101787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'user', '8706757132');
+('CP2',  'SM',   '06K',   't',    't',    'D3485',    '506234B',  '2024-02-14 02:39:49.275',  NULL,   NULL,   2,  'oumou@esp.sn',  'Oumou Hawa',  'Diallo', '774101787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'ROLE_USER', '8706757132');
 
 
 INSERT INTO "utilisateur" ("code_corps_agent", "code_section", "code_unite_douaniere", "is_active", "is_not_locked", "code_agent", "matricule_agent", "join_date", "last_login_date", "last_login_date_display", "utilisateur_id", "email", "first_name", "last_name", "mobile", "profile_image_url", "pwd", "role", "user_id") VALUES
-('CP3',  'SG',   '06Z',   't',    't',    'D2814',    '622543E',  '2024-02-14 02:39:49.275',  NULL,   NULL,   3,  'admin@esp.sn',  'Administrateur',  'Admin', '775211787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'user', '8706757133');
+('CP3',  'SG',   '06Z',   't',    't',    'D2814',    '622543E',  '2024-02-14 02:39:49.275',  NULL,   NULL,   3,  'admin@esp.sn',  'Administrateur',  'Admin', '775211787',    NULL,   '$2a$10$wlhYjN7p4EJXUJThwGDIK.Ex0MGUwH2oBeGNDBcYRD0uuk8XcFKNK', 'ROLE_ADMIN', '8706757133');
 
 
 -------------------------------------------------------------------------------------------------------------------------

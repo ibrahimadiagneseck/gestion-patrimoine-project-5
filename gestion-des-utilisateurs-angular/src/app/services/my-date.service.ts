@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import * as CryptoJS from 'crypto-js';
 import { DatePipe } from '@angular/common';
-import { MyDate } from '../model/my-date.model';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { MyDate } from '../model/date.model';
 
 @Injectable({
   providedIn: 'root'

@@ -4,8 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 import sn.douanes.exception.entities.EmailExistException;
 import sn.douanes.exception.entities.UserNotFoundException;
+import sn.douanes.model.Authority;
 import sn.douanes.model.Utilisateur;
 import sn.douanes.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import sn.douanes.services.EmailService;
@@ -25,6 +23,7 @@ import java.sql.Date;
 import java.util.List;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.springframework.http.HttpStatus.OK;
 import static sn.douanes.constants.UserImplConstant.EMAIL_ALREADY_EXISTS;
 import static sn.douanes.constants.UserImplConstant.NO_USER_FOUND_BY_USERNAME;
 
@@ -71,7 +70,7 @@ public class LoginController {
             user.setCodeCorpsAgent(utilisateur.getCodeCorpsAgent());
             user.setCodeSection(utilisateur.getCodeSection());
 
-            user.setRole("user");
+            user.setRole("ROLE_USER");
             // utilisateur.setAuthorities(Role.ROLE_USER.getAuthorities());
 
             user.setActive(true);
@@ -96,16 +95,33 @@ public class LoginController {
     }
 
     @RequestMapping("/connexion")
-    public Utilisateur getUserDetailsAfterLogin(Authentication authentication) {
+    public ResponseEntity<Utilisateur> getUserDetailsAfterLogin(Authentication authentication) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(authentication.getName());
+
         if (null != utilisateur) {
-            return utilisateur;
+            return new ResponseEntity<>(utilisateur, OK);
         } else {
             return null;
         }
-
     }
 
+//    @RequestMapping("/connexion")
+//    public Utilisateur getUserDetailsAfterLogin(Authentication authentication) {
+//        Utilisateur utilisateur = utilisateurRepository.findByEmail(authentication.getName());
+//        if (null != utilisateur) {
+//            return utilisateur;
+//        } else {
+//            return null;
+//        }
+//
+//    }
+
+
+    @GetMapping("/Users")
+    public ResponseEntity<List<Utilisateur>> getAllAjouterUsers() {
+        List<Utilisateur> authority = utilisateurRepository.findAll();
+        return new ResponseEntity<>(authority, OK);
+    }
 
 
     private String generateUserId() {

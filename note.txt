@@ -23,7 +23,7 @@ http://localhost:8081/inscription
 http://localhost:8081/connexion
 
 Authorization : basic auth
-ibrahima@esp.sn
+admin@esp.sn
 lOJk8OqaH3
 
 

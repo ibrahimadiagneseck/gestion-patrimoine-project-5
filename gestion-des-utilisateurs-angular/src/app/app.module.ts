@@ -15,6 +15,17 @@ import { NgToastModule } from 'ng-angular-popup';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UtilisateurListeComponent } from './pages/utilisateur/utilisateur-liste/utilisateur-liste.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UtilisateurAjouterComponent } from './pages/utilisateur/utilisateur-ajouter/utilisateur-ajouter.component';
+import { UtilisateurDetailComponent } from './pages/utilisateur/utilisateur-detail/utilisateur-detail.component';
 
 
 
@@ -38,7 +49,9 @@ export const MY_DATE_FORMATS = {
     DeconnexionComponent,
     ErreurComponent,
 
-    UtilisateurListeComponent
+    UtilisateurListeComponent,
+    UtilisateurAjouterComponent,
+    UtilisateurDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +60,16 @@ export const MY_DATE_FORMATS = {
     ReactiveFormsModule, // pour formGroup
     BrowserAnimationsModule,
     HttpClientModule, // pour le backend
+
+    MatTableModule, MatPaginatorModule,
+
+    MatExpansionModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
+    MatDialogModule,
 
     NgToastModule,
 

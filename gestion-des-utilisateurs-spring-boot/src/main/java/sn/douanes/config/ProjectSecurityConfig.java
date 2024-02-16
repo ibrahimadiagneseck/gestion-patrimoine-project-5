@@ -51,7 +51,8 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         (requests)->requests
-                        // .requestMatchers("/myAccount").hasRole("USER")
+                        .requestMatchers("/Authorities").hasAuthority("ADMINISTRATEUR")
+                        .requestMatchers("/Users").hasAuthority("ADMINISTRATEUR")
                         // .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
                         // .requestMatchers("/myLoans").authenticated()
                         // .requestMatchers("/myCards").hasRole("USER")

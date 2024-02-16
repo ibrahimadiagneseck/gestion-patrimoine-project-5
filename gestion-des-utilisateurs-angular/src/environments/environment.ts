@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  rooturl : 'http://localhost:8081'
+  rooturl1 : 'http://localhost:8081',
+  rooturl2 : 'http://localhost:8082',
+  tokenFromUI: "CleSecreteDe2023"
 };
 
 /*
