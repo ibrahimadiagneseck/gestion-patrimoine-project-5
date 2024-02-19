@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Sections;
@@ -25,18 +26,20 @@ public class TypeObjetController {
 
 
     @GetMapping("/TypeObjets")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<TypeObjet>> getAllTypeObjets() {
         List<TypeObjet> typeObjet = typeObjetService.getAllTypeObjets();
         return new ResponseEntity<>(typeObjet, OK);
     }
 
     @PostMapping("/AjouterTypeObjet")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeObjet AjouterTypeObjet(@RequestBody TypeObjet typeObjet) {
         return typeObjetService.saveTypeObjet(typeObjet);
     }
 
     @PostMapping("/AjouterRequestParamTypeObjet")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<TypeObjet> ajouterTypeObjet (
             @RequestParam("codeTypeObjet") String codeTypeObjet,
             @RequestParam("libelleTypeObjet") String libelleTypeObjet,
@@ -47,13 +50,14 @@ public class TypeObjetController {
     }
 
     @PutMapping("/ModifierTypeObjet")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeObjet ModifierTypeObjet(@RequestBody TypeObjet t) {
 
         return typeObjetService.updateTypeObjet(t);
     }
 
     @DeleteMapping("SupprimerTypeObjetById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerTypeObjetById(@PathVariable("id") String codeTypeObjet) {
         typeObjetService.deleteTypeObjetById(codeTypeObjet);
     }

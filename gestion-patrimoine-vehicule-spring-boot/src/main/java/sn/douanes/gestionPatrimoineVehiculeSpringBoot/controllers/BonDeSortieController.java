@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.BonDeSortieService;
@@ -22,6 +23,7 @@ public class BonDeSortieController {
     BonDeSortieService bonDeSortieService;
 
     @GetMapping("/BonDeSorties")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<BonDeSortie>> getAllBonDeSorties() {
         List<BonDeSortie> BonDeSortie = bonDeSortieService.getAllBonDeSorties();
         return new ResponseEntity<>(BonDeSortie, OK);
@@ -30,7 +32,7 @@ public class BonDeSortieController {
 
 
     @PostMapping("/AjouterBonDeSortie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonDeSortie AjouterBonDeSortie(@RequestBody BonDeSortie bonDeSortie) {
         // return BonDeSortieService.saveBonDeSortie(BonDeSortie);
         return bonDeSortieService.ajouterBonDeSortie(bonDeSortie.getNumeroBS(), bonDeSortie.getDescriptionBS(), bonDeSortie.getIdentifiantBP(), bonDeSortie.getMatriculeAgent());
@@ -38,17 +40,19 @@ public class BonDeSortieController {
 
 
     @PutMapping("/ModifierBonDeSortie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonDeSortie ModifierBonDeSortie(@RequestBody BonDeSortie b) {
         return bonDeSortieService.updateBonDeSortie(b);
     }
 
     @DeleteMapping("SupprimerBonDeSortieById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerBonDeSortieById(@PathVariable("id") String identifiantBS) {
         bonDeSortieService.deleteBonDeSortieById(identifiantBS);
     }
 
     @GetMapping("RecupererBonDeSortieById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonDeSortie RecupererBonDeSortieById(@PathVariable("id") String identifiantBS) {
         return bonDeSortieService.getBonDeSortieById(identifiantBS);
     }
@@ -58,4 +62,5 @@ public class BonDeSortieController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
+
 }

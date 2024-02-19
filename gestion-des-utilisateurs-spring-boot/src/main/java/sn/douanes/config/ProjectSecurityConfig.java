@@ -41,7 +41,7 @@ public class ProjectSecurityConfig {
                 config.setMaxAge(3600L);
                 return config;
             }
-        })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact","/inscription")
+        })).csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/erreur","/public")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
@@ -51,15 +51,20 @@ public class ProjectSecurityConfig {
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(
                         (requests)->requests
-                        .requestMatchers("/Authorities").hasAuthority("ADMINISTRATEUR")
-                        .requestMatchers("/Users").hasAuthority("ADMINISTRATEUR")
+                        // .requestMatchers("/Authorities").hasAuthority("ADMINISTRATEUR")
+                        // .requestMatchers("/Users").hasAuthority("ADMINISTRATEUR")
                         // .requestMatchers("/myBalance").hasAnyRole("USER","ADMIN")
                         // .requestMatchers("/myLoans").authenticated()
                         // .requestMatchers("/myCards").hasRole("USER")
-                        //.requestMatchers("/user").authenticated()
-                        //.requestMatchers("/notices","/contact","/register").permitAll())
+                        // .requestMatchers("/user").authenticated()
+                        // .requestMatchers("/notices","/contact","/register").permitAll())
+                        // .requestMatchers("/connexion").authenticated()
+                        // .requestMatchers("/inscription").permitAll()
+
+                        .requestMatchers("/Authorities").authenticated()
+                        .requestMatchers("/Users").authenticated()
                         .requestMatchers("/connexion").authenticated()
-                        .requestMatchers("/inscription").permitAll()
+                        .requestMatchers("/inscription").authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());

@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Prestataires;
@@ -26,13 +27,14 @@ public class PrestatairesSecteurController {
 
 
     @GetMapping("/PrestatairesSecteurs")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<PrestatairesSecteur>> getAllPrestatairesSecteurs() {
         List<PrestatairesSecteur> prestatairesSecteur = prestatairesSecteurService.getAllPrestatairesSecteur();
         return new ResponseEntity<>(prestatairesSecteur, OK);
     }
 
     @PostMapping("/AjouterPrestatairesSecteurs")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public PrestatairesSecteur AjouterPrestatairesSecteur(@RequestBody PrestatairesSecteur prestatairesSecteur) {
         return prestatairesSecteurService.savePrestatairesSecteur(prestatairesSecteur);
     }
@@ -48,13 +50,14 @@ public class PrestatairesSecteurController {
 
 
     @PutMapping("/ModifierPrestatairesSecteur")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public PrestatairesSecteur ModifierPrestatairesSecteur(@RequestBody PrestatairesSecteur p) {
 
         return prestatairesSecteurService.updatePrestatairesSecteur(p);
     }
 
     @DeleteMapping("SupprimerPrestatairesSecteurById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerPrestatairesSecteurById(
             @PathVariable("ninea") Prestataires ninea,
             @PathVariable("codeSecteurActivite") SecteurActivite codeSecteurActivite
@@ -68,6 +71,5 @@ public class PrestatairesSecteurController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

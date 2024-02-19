@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.VehiculeService;
@@ -26,6 +27,7 @@ public class VehiculeController {
     VehiculeService vehiculeService;
 
     @GetMapping("/Vehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Vehicule>> listeVehicules() {
         List<Vehicule> vehicules = vehiculeService.getAllVehicules();
         return new ResponseEntity<>(vehicules, OK);
@@ -33,14 +35,14 @@ public class VehiculeController {
 
 
     @PostMapping("/AjouterVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Vehicule AjouterVehicule(@RequestBody Vehicule vehicule) {
 
         return vehiculeService.ajouterVehicule(vehicule.getNumeroSerie(), vehicule.getNumeroImmatriculation(), vehicule.getModele(), vehicule.getCodeEtat(), vehicule.getCodeTypeEnergie(), vehicule.getNumeroCarteGrise(), vehicule.getDateMiseEnCirculation(), vehicule.getCodePays(), vehicule.getCodeTypeVehicule(), vehicule.getCodeMarque(), vehicule.getIdentifiantBE());
     }
 
     @PostMapping("/ajouterVehiculeDotation")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Vehicule ajouterVehiculeDotation(@RequestBody Vehicule vehicule) {
 
         return vehiculeService.ajouterVehiculeDotation(vehicule, vehicule.getDotationVehicule());
@@ -48,6 +50,7 @@ public class VehiculeController {
 
 
     @PostMapping("/AjouterRequestParamVehicule")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Vehicule> ajouterVehicule(
             @RequestParam("numeroSerie") String numeroSerie,
             @RequestParam("numeroImmatriculation") String numeroImmatriculation,
@@ -67,7 +70,7 @@ public class VehiculeController {
 
 
     @PutMapping("/ModifierVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Vehicule ModifierVehicule(@RequestBody Vehicule v) {
         
         return vehiculeService.updateVehicule(v);
@@ -75,6 +78,7 @@ public class VehiculeController {
 
 
     @DeleteMapping("SupprimerVehiculeById/{numeroSerie}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<HttpResponse> SupprimerPrestatairesById(@PathVariable("numeroSerie") String numeroSerie) {
 
         vehiculeService.deleteVehiculeById(numeroSerie);

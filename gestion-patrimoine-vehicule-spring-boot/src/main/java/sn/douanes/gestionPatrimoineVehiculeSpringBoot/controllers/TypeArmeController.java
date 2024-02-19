@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.TypeArme;
@@ -22,25 +23,27 @@ public class TypeArmeController {
     TypeArmeService typeArmeService;
 
     @GetMapping("/TypeArmes")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<TypeArme>> getAllTypeArmes() {
         List<TypeArme> typeArme = typeArmeService.getAllTypeArmes();
         return new ResponseEntity<>(typeArme, OK);
     }
 
     @PostMapping("/AjouterTypeArme")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeArme AjouterTypeArme(@RequestBody TypeArme t) {
         return typeArmeService.saveTypeArme(t);
     }
 
     @PutMapping("/ModifierTypeArme")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeArme ModifierTypeArme(@RequestBody TypeArme t) {
 
         return typeArmeService.updateTypeArme(t);
     }
 
     @DeleteMapping("SupprimerTypeArmeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerTypeArmeById(@PathVariable("id") String code_type_arme) {
         typeArmeService.deleteTypeArmeById(code_type_arme);
     }

@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.DotationVehicule;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.DotationVehiculeVehicule;
@@ -31,6 +32,7 @@ public class DotationVehiculeVehiculeController {
 
 
     @GetMapping("/DotationVehiculeVehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<DotationVehiculeVehicule>> getAllDotationVehiculeVehiscules() {
         List<DotationVehiculeVehicule> dotationVehiculeVehicule = dotationVehiculeVehiculeService.getAllDotationVehiculeVehicule();
         return new ResponseEntity<>(dotationVehiculeVehicule, OK);
@@ -38,6 +40,7 @@ public class DotationVehiculeVehiculeController {
 
 
     @GetMapping("RecupererDotationByVehiculeId/{numeroSerie}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<DotationVehiculeVehicule> RecupererDotationByVehiculeId(@PathVariable("numeroSerie") String numeroSerie) {
 
         Vehicule vehicule =  vehiculeService.getVehiculeById(numeroSerie);
@@ -46,7 +49,7 @@ public class DotationVehiculeVehiculeController {
     }
 
     @PostMapping("/AjouterDotationVehiculeVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public DotationVehiculeVehicule AjouterDotationVehiculeVehicule(@RequestBody DotationVehiculeVehicule dotationVehiculeVehicule) {
         return dotationVehiculeVehiculeService.saveDotationVehiculeVehicule(dotationVehiculeVehicule);
     }
@@ -62,13 +65,14 @@ public class DotationVehiculeVehiculeController {
 
 
     @PutMapping("/ModifierDotationVehiculeVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public DotationVehiculeVehicule ModifierDotationVehiculeVehicule(@RequestBody DotationVehiculeVehicule d) {
 
         return dotationVehiculeVehiculeService.updateDotationVehiculeVehicule(d);
     }
 
     @DeleteMapping("SupprimerDotationVehiculeVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerDotationVehiculeVehiculeById(
             @PathVariable("numeroSerie") Vehicule numeroSerie,
             @PathVariable("identifiantDV") DotationVehicule identifiantDV

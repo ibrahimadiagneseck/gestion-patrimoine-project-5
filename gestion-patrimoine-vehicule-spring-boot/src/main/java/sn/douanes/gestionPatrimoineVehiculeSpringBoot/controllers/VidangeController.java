@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Vidange;
@@ -23,24 +24,26 @@ public class VidangeController {
 
 
     @GetMapping("/Vidanges")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Vidange>> getAllVidanges() {
         List<Vidange> vidange = vidangeService.getAllVidanges();
         return new ResponseEntity<>(vidange, OK);
     }
 
     @PostMapping("/AjouterVidange")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Vidange AjouterVidange(@RequestBody Vidange v) {
         return vidangeService.saveVidange(v);
     }
 
     @PutMapping("/ModifierVidange")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Vidange ModifierVidange(@RequestBody Vidange v) {
         return vidangeService.updateVidange(v);
     }
 
     @DeleteMapping("SupprimerVidangeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerVidangeById(@PathVariable("id") String numeroImmatriculation) {
         vidangeService.deleteVidangeById(numeroImmatriculation);
     }

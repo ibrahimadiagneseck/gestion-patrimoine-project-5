@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.*;
@@ -33,13 +34,14 @@ public class BordereauLivraisonController {
 
 
     @GetMapping("/BordereauLivraisons")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<BordereauLivraison>> getAllBordereauLivraisons() {
         List<BordereauLivraison> bordereauLivraisons = bordereauLivraisonService.getAllBordereauLivraisons();
         return new ResponseEntity<>(bordereauLivraisons, OK);
     }
 
     @PostMapping("/AjouterBordereauLivraison")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BordereauLivraison AjouterBordereauLivraison(@RequestBody BordereauLivraison bordereauLivraison) {
 
         // return bordereauLivraisonService.saveBordereauLivraison(bordereauLivraison);
@@ -49,6 +51,7 @@ public class BordereauLivraisonController {
 
 
     @PostMapping("/AjouterRequestParamBordereauLivraison")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<BordereauLivraison> ajouterBordereauLivraison (
             @RequestParam("numeroBL") String numeroBL,
             @RequestParam("descriptionBL") String descriptionBL,
@@ -76,22 +79,21 @@ public class BordereauLivraisonController {
     }
 
     @PutMapping("/ModifierBordereauLivraison")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BordereauLivraison ModifierBordereauLivraison(@RequestBody BordereauLivraison b) {
         return bordereauLivraisonService.updateBordereauLivraison(b);
     }
 
     @DeleteMapping("SupprimerBordereauLivraisonById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerBordereauLivraisonById(@PathVariable("id") String identifiantBL) {
         bordereauLivraisonService.deleteBordereauLivraisonById(identifiantBL);
     }
-
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.ArticleBonPourService;
@@ -27,25 +28,27 @@ public class ArticleBonPourController {
 
     
     @GetMapping("/ArticleBonPours")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<ArticleBonPour>> getAllArticleBonPours() {
         List<ArticleBonPour> articleBonPour = articleBonPourService.getAllArticleBonPours();
         return new ResponseEntity<>(articleBonPour, OK);
     }
 
     @PostMapping("/AjouterArticleBonPour")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ArticleBonPour AjouterArticleBonPour(@RequestBody ArticleBonPour articleBonPour) {
         return articleBonPourService.ajouterArticleBonPour(articleBonPour.getIdentifiantBP(), articleBonPour.getCodeArticleBonPour(), articleBonPour.getLibelleArticleBonPour(), articleBonPour.getQuantiteDemandee(), articleBonPour.getCodeTypeObjet(), articleBonPour.getMatriculeAgent());
     }
 
 
     @PutMapping("/ModifierArticleBonPour")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ArticleBonPour ModifierArticleBonPour(@RequestBody ArticleBonPour a) {
         return articleBonPourService.updateArticleBonPour(a);
     }
 
     @DeleteMapping("SupprimerArticleBonPourById/{codeArticleBonPour}/{identifiantBP}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerArticleBonPour(
             @PathVariable("codeArticleBonPour") String codeArticleBonPour,
             @PathVariable("identifiantBP") BonPour identifiantBP
@@ -54,6 +57,7 @@ public class ArticleBonPourController {
     }
 
     @GetMapping("RecupererArticleBonPourById/{identifiantBP}/{codeArticleBonPour}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ArticleBonPour RecupererArticleBonPourById(
             @PathVariable("identifiantBP") String identifiantBP,
             @PathVariable("codeArticleBonPour") String codeArticleBonPour
@@ -64,8 +68,7 @@ public class ArticleBonPourController {
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(
-                new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message),
-                httpStatus
+                new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
 

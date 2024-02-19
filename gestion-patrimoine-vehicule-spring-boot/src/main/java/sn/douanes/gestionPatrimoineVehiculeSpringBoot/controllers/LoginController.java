@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Utilisateur;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.exception.entities.EmailExistException;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.exception.entities.UserNotFoundException;
@@ -41,6 +43,7 @@ public class LoginController {
 
 
     @PostMapping("/inscription")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<String> registerUser(@RequestBody Utilisateur utilisateur) {
         Utilisateur savedUtilisateur = null;
         ResponseEntity response = null;
@@ -93,6 +96,7 @@ public class LoginController {
     }
 
     @RequestMapping("/connexion")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Utilisateur> getUserDetailsAfterLogin(Authentication authentication) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(authentication.getName());
 
@@ -116,6 +120,7 @@ public class LoginController {
 
 
     @GetMapping("/Users")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Utilisateur>> getAllAjouterUsers() {
         List<Utilisateur> authority = utilisateurRepository.findAll();
         return new ResponseEntity<>(authority, OK);
@@ -155,6 +160,12 @@ public class LoginController {
 
             return null;
         }
+    }
+
+    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
+        return new ResponseEntity<>(
+                new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
+        );
     }
 
 }

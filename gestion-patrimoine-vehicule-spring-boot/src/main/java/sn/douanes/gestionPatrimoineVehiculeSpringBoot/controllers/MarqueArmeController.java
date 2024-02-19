@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.MarqueArme;
@@ -23,29 +24,30 @@ public class MarqueArmeController {
 
 
     @GetMapping("/MarqueArmes")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<MarqueArme>> getAllMarqueArmes() {
         List<MarqueArme> marqueArme = marqueArmeService.getAllMarqueArmes();
         return new ResponseEntity<>(marqueArme, OK);
     }
 
     @PostMapping("/AjouterMarqueArme")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public MarqueArme AjouterMarqueArme(@RequestBody MarqueArme m) {
         return marqueArmeService.saveMarqueArme(m);
     }
 
     @PutMapping("/ModifierMarqueArme")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public MarqueArme ModifierMarqueArme(@RequestBody MarqueArme m) {
 
         return marqueArmeService.updateMarqueArme(m);
     }
 
     @DeleteMapping("SupprimerMarqueArmeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerMarqueArmeById(@PathVariable("id") String code_marque_arme) {
         marqueArmeService.deleteMarqueArmeById(code_marque_arme);
     }
-
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(

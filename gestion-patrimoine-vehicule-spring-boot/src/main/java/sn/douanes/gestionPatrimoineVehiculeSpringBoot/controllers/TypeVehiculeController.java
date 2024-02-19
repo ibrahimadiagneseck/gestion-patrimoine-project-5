@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.TypeVehicule;
@@ -23,18 +24,20 @@ public class TypeVehiculeController {
 
 
     @GetMapping("/TypeVehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<TypeVehicule>> getAllTypeVehicules() {
         List<TypeVehicule> typeVehicule = typeVehiculeService.getAllTypeVehicules();
         return new ResponseEntity<>(typeVehicule, OK);
     }
 
     @PostMapping("/AjouterTypeVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeVehicule AjouterTypeVehicule(@RequestBody TypeVehicule typeVehicule) {
         return typeVehiculeService.saveTypeVehicule(typeVehicule);
     }
 
     @PostMapping("/AjouterRequestParamTypeVehicule")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<TypeVehicule> ajouterTypeVehicule (
             @RequestParam("codeTypeVehicule") String codeTypeVehicule,
             @RequestParam("libelleTypeVehicule") String libelleTypeVehicule
@@ -44,12 +47,13 @@ public class TypeVehiculeController {
     }
 
     @PutMapping("/ModifierTypeVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeVehicule ModifierTypeVehicule(@RequestBody TypeVehicule t) {
         return typeVehiculeService.updateTypeVehicule(t);
     }
 
     @DeleteMapping("SupprimerTypeVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerTypeVehiculeById(@PathVariable("id") String codeTypeVehicule) {
         typeVehiculeService.deleteTypeVehiculeById(codeTypeVehicule);
     }

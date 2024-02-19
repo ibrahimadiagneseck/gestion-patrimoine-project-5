@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.EtatVehicule;
@@ -23,18 +24,20 @@ public class EtatVehiculeController {
     EtatVehiculeService etatVehiculeService;
 
     @GetMapping("/EtatVehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<EtatVehicule>> getAllEtatVehicules() {
         List<EtatVehicule> etatVehicule = etatVehiculeService.getAllEtatVehicules();
         return new ResponseEntity<>(etatVehicule, OK);
     }
 
     @PostMapping("/AjouterEtatVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public EtatVehicule AjouterEtatVehicule(@RequestBody EtatVehicule etatVehicule) {
         return etatVehiculeService.saveEtatVehicule(etatVehicule);
     }
 
     @PostMapping("/AjouterRequestParamEtatVehicule")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<EtatVehicule> ajouterEtatVehicule (
             @RequestParam("codeEtat") String codeEtat,
             @RequestParam("libelleEtat") String libelleEtat
@@ -44,12 +47,13 @@ public class EtatVehiculeController {
     }
 
     @PutMapping("/ModifierEtatVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public EtatVehicule ModifierEtatVehicule(@RequestBody EtatVehicule t) {
         return etatVehiculeService.updateEtatVehicule(t);
     }
 
     @DeleteMapping("SupprimerEtatVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerEtatVehiculeById(@PathVariable("id") String codeEtat) {
         etatVehiculeService.deleteEtatVehiculeById(codeEtat);
     }
@@ -60,6 +64,5 @@ public class EtatVehiculeController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

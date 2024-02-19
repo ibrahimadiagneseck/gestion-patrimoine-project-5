@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.UniteDouaniereSectionsService;
@@ -23,18 +24,20 @@ public class UniteDouaniereSectionsController {
 
 
     @GetMapping("/UniteDouaniereSections")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<UniteDouaniereSections>> getAllUniteDouaniereSectionss() {
         List<UniteDouaniereSections> uniteDouaniereSections = uniteDouaniereSectionsService.getAllUniteDouaniereSections();
         return new ResponseEntity<>(uniteDouaniereSections, OK);
     }
 
     @PostMapping("/AjouterUniteDouaniereSectionss")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public UniteDouaniereSections AjouterUniteDouaniereSections(@RequestBody UniteDouaniereSections uniteDouaniereSections) {
         return uniteDouaniereSectionsService.saveUniteDouaniereSections(uniteDouaniereSections);
     }
 
     @PostMapping("/AjouterRequestParamUniteDouaniereSections")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<UniteDouaniereSections> ajouterUniteDouaniereSections (
             @RequestParam("codeUniteDouaniere") UniteDouaniere codeUniteDouaniere,
             @RequestParam("codeSection") Sections codeSection
@@ -45,13 +48,14 @@ public class UniteDouaniereSectionsController {
 
 
     @PutMapping("/ModifierUniteDouaniereSections")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public UniteDouaniereSections ModifierUniteDouaniereSections(@RequestBody UniteDouaniereSections p) {
 
         return uniteDouaniereSectionsService.updateUniteDouaniereSections(p);
     }
 
     @DeleteMapping("SupprimerUniteDouaniereSectionsById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerUniteDouaniereSectionsById(
             @PathVariable("codeUniteDouaniere") UniteDouaniere codeUniteDouaniere,
             @PathVariable("codeSection") Sections codeSection

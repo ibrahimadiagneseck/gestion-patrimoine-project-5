@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Armes;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
@@ -22,28 +24,29 @@ public class ArmesController {
     ArmesService armesService;
 
     @GetMapping("/Armes")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Armes>> getAllArmes() {
         List<Armes> armes = armesService.getAllArmes();
         return new ResponseEntity<>(armes, OK);
     }
 
     @PostMapping("/AjouterArmes")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Armes AjouterArmes(@RequestBody Armes a) {
         return armesService.saveArmes(a);
     }
 
     @PutMapping("/ModifierArmes")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Armes ModifierArmes(@RequestBody Armes a) {
         return armesService.updateArmes(a);
     }
 
     @DeleteMapping("SupprimerArmesById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerArmesById(@PathVariable("id") String numeroArme ) {
         armesService.deleteArmesById(numeroArme);
     }
-
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(

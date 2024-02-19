@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.BonEntreeService;
@@ -25,6 +26,7 @@ public class BonEntreeController {
 
 
     @GetMapping("/BonEntrees")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<BonEntree>> getAllBonEntrees() {
         List<BonEntree> bonEntree = bonEntreeService.getAllBonEntrees();
         return new ResponseEntity<>(bonEntree, OK);
@@ -32,7 +34,7 @@ public class BonEntreeController {
 
 
     @PostMapping("/AjouterBonEntree")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonEntree AjouterBonEntree(@RequestBody BonEntree bonEntree) {
         // return bonEntreeService.saveBonEntree(bonEntree);
         return bonEntreeService.ajouterBonEntree(bonEntree.getNumeroBE(), bonEntree.getLibelleBonEntree(), bonEntree.getDateBonEntree(), bonEntree.getObservationBonEntree(), bonEntree.getIdentifiantBL());
@@ -55,17 +57,19 @@ public class BonEntreeController {
 
 
     @PutMapping("/ModifierBonEntree")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonEntree ModifierBonEntree(@RequestBody BonEntree b) {
         return bonEntreeService.updateBonEntree(b);
     }
 
     @DeleteMapping("SupprimerBonEntreeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerBonEntreeById(@PathVariable("id") String identifiantBE) {
         bonEntreeService.deleteBonEntreeById(identifiantBE);
     }
 
     @GetMapping("RecupererBonEntreeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public BonEntree RecupererBonEntreeById(@PathVariable("id") String identifiantBE) {
         return bonEntreeService.getBonEntreeById(identifiantBE);
     }
@@ -75,4 +79,5 @@ public class BonEntreeController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
+
 }

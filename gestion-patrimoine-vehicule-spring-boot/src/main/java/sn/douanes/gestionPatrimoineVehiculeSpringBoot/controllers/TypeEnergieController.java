@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.TypeEnergie;
@@ -23,18 +24,20 @@ public class TypeEnergieController {
     TypeEnergieService typeEnergieService;
 
     @GetMapping("/TypeEnergies")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<TypeEnergie>> getAllTypeEnergies() {
         List<TypeEnergie> typeEnergie = typeEnergieService.getAllTypeEnergies();
         return new ResponseEntity<>(typeEnergie, OK);
     }
 
     @PostMapping("/AjouterTypeEnergie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeEnergie AjouterTypeEnergie(@RequestBody TypeEnergie typeEnergie) {
         return typeEnergieService.saveTypeEnergie(typeEnergie);
     }
 
     @PostMapping("/AjouterRequestParamTypeEnergie")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<TypeEnergie> ajouterTypeEnergie (
             @RequestParam("codeTypeEnergie") String codeTypeEnergie,
             @RequestParam("libelleTypeEnergie") String libelleTypeEnergie
@@ -44,12 +47,13 @@ public class TypeEnergieController {
     }
 
     @PutMapping("/ModifierTypeEnergie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeEnergie ModifierTypeEnergie(@RequestBody TypeEnergie t) {
         return typeEnergieService.updateTypeEnergie(t);
     }
 
     @DeleteMapping("SupprimerTypeEnergieById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerTypeEnergieById(@PathVariable("id") String codeTypeEnergie) {
         typeEnergieService.deleteTypeEnergieById(codeTypeEnergie);
     }

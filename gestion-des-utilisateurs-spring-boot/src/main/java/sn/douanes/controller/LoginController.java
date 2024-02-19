@@ -3,6 +3,7 @@ package sn.douanes.controller;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.exception.entities.EmailExistException;
@@ -43,6 +44,7 @@ public class LoginController {
 
 
     @PostMapping("/inscription")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<String> registerUser(@RequestBody Utilisateur utilisateur) {
         Utilisateur savedUtilisateur = null;
         ResponseEntity response = null;
@@ -95,6 +97,7 @@ public class LoginController {
     }
 
     @RequestMapping("/connexion")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Utilisateur> getUserDetailsAfterLogin(Authentication authentication) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(authentication.getName());
 
@@ -118,6 +121,7 @@ public class LoginController {
 
 
     @GetMapping("/Users")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Utilisateur>> getAllAjouterUsers() {
         List<Utilisateur> authority = utilisateurRepository.findAll();
         return new ResponseEntity<>(authority, OK);

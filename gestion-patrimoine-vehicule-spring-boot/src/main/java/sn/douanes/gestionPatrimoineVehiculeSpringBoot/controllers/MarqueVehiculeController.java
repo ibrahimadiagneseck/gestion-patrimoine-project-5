@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.MarqueVehicule;
@@ -24,18 +25,20 @@ public class MarqueVehiculeController {
 
 
     @GetMapping("/MarqueVehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<MarqueVehicule>> getAllMarqueVehicules() {
         List<MarqueVehicule> marqueVehicule = marqueVehiculeService.getAllMarqueVehicules();
         return new ResponseEntity<>(marqueVehicule, OK);
     }
 
     @PostMapping("/AjouterMarqueVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public MarqueVehicule AjouterMarqueVehicule(@RequestBody MarqueVehicule marqueVehicule) {
         return marqueVehiculeService.saveMarqueVehicule(marqueVehicule);
     }
 
     @PostMapping("/AjouterRequestParamMarqueVehicule")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<MarqueVehicule> ajouterMarqueVehicule (
             @RequestParam("codeMarque") String codeMarque,
             @RequestParam("libelleMarque") String libelleMarque
@@ -45,12 +48,13 @@ public class MarqueVehiculeController {
     }
 
     @PutMapping("/ModifierMarqueVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public MarqueVehicule ModifierMarqueVehicule(@RequestBody MarqueVehicule t) {
         return marqueVehiculeService.updateMarqueVehicule(t);
     }
 
     @DeleteMapping("SupprimerMarqueVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerMarqueVehiculeById(@PathVariable("id") String codeMarque) {
         marqueVehiculeService.deleteMarqueVehiculeById(codeMarque);
     }
@@ -61,6 +65,5 @@ public class MarqueVehiculeController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

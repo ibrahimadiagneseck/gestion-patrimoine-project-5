@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Materiels;
@@ -23,25 +24,27 @@ public class MaterielsController {
 
 
     @GetMapping("/Materiels")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Materiels>> getAllMateriels() {
         List<Materiels> materiels = materielsService.getAllMateriels();
         return new ResponseEntity<>(materiels, OK);
     }
 
     @PostMapping("/AjouterMateriels")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Materiels AjouterMateriels(@RequestBody Materiels m) {
         return materielsService.saveMateriels(m);
     }
 
     @PutMapping("/ModifierMateriels")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Materiels ModifierMateriels(@RequestBody Materiels m) {
 
         return materielsService.updateMateriels(m);
     }
 
     @DeleteMapping("SupprimerMaterielsById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerMaterielsById(@PathVariable("id") String code_materiel) {
         materielsService.deleteMaterielsById( code_materiel );
     }
@@ -52,6 +55,5 @@ public class MaterielsController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.SectionsService;
@@ -23,18 +24,20 @@ public class SectionsController {
 
 
     @GetMapping("/Sections")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Sections>> getAllSectionss() {
         List<Sections> sections = sectionsService.getAllSectionss();
         return new ResponseEntity<>(sections, OK);
     }
 
     @PostMapping("/AjouterSections")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Sections AjouterSections(@RequestBody Sections sections) {
         return sectionsService.saveSections(sections);
     }
 
     @PostMapping("/AjouterRequestParamSections")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Sections> ajouterSections (
             @RequestParam("numeroBE") String codeSection,
             @RequestParam("numeroBE") String libelleSection,
@@ -45,13 +48,14 @@ public class SectionsController {
     }
 
     @PutMapping("/ModifierSections")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Sections ModifierSections(@RequestBody Sections t) {
 
         return sectionsService.updateSections(t);
     }
 
     @DeleteMapping("SupprimerSectionsById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerSectionsById(@PathVariable("id") String codeSection) {
         sectionsService.deleteSectionsById(codeSection);
     }

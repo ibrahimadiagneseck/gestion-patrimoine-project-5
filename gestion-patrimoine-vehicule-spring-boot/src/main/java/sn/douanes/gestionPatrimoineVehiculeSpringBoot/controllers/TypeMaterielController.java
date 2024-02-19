@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.TypeMateriel;
@@ -23,25 +24,26 @@ public class TypeMaterielController {
 
 
     @GetMapping("/TypeMateriels")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<TypeMateriel>> getAllTypeMateriels() {
         List<TypeMateriel> typeMateriel = typeMaterielService.getAllTypeMateriels();
         return new ResponseEntity<>(typeMateriel, OK);
     }
 
     @PostMapping("/AjouterTypeMateriel")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeMateriel AjouterTypeMateriel(@RequestBody TypeMateriel t) {
         return typeMaterielService.saveTypeMateriel(t);
     }
 
     @PutMapping("/ModifierTypeMateriel")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public TypeMateriel ModifierTypeMateriel(@RequestBody TypeMateriel t) {
-
         return typeMaterielService.updateTypeMateriel(t);
     }
 
     @DeleteMapping("SupprimerTypeMaterielById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerTypeMaterielById(@PathVariable("id") String code_type_materiel) {
         typeMaterielService.deleteTypeMaterielById( code_type_materiel);
     }

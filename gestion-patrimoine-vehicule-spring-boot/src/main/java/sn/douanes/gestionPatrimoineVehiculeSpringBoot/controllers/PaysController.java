@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Pays;
@@ -24,6 +25,7 @@ public class PaysController {
 
 
     @GetMapping("/Pays")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Pays>> getAllPays() {
         List<Pays> pays = paysService.getAllPays();
         return new ResponseEntity<>(pays, OK);
@@ -31,13 +33,14 @@ public class PaysController {
 
 
     @PostMapping("/AjouterPays")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Pays AjouterPays(@RequestBody Pays pays) {
         return paysService.savePays(pays);
     }
 
 
     @PostMapping("/AjouterRequestParamPays")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Pays> ajouterPays (
             @RequestParam("codePays") String codePays,
             @RequestParam("libellePays") String libellePays
@@ -48,12 +51,13 @@ public class PaysController {
 
 
     @PutMapping("/ModifierPays")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Pays ModifierPays(@RequestBody Pays p) {
         return paysService.updatePays(p);
     }
 
     @DeleteMapping("SupprimerPaysById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerPaysById(@PathVariable("id") String codePays) {
         paysService.deletePaysById(codePays);
     }
@@ -63,7 +67,5 @@ public class PaysController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
-
 
 }

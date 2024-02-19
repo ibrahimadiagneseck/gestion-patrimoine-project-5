@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Maintenance;
@@ -23,34 +24,34 @@ public class MaintenanceController {
 
 
     @GetMapping("/Maintenances")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Maintenance>> getAllMaintenances() {
         List<Maintenance> maintenance = maintenanceService.getAllMaintenances();
         return new ResponseEntity<>(maintenance, OK);
     }
 
     @PostMapping("/AjouterMaintenance")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Maintenance AjouterMaintenance(@RequestBody Maintenance m) {
         return maintenanceService.saveMaintenance(m);
     }
 
     @PutMapping("/ModifierMaintenance")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Maintenance ModifierMaintenance(@RequestBody Maintenance m) {
         return maintenanceService.updateMaintenance(m);
     }
 
     @DeleteMapping("SupprimerMaintenanceById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerMaintenanceById(@PathVariable("id") String maintenance ) {
         maintenanceService.deleteMaintenanceById(maintenance);
     }
-
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Carburant;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
@@ -22,24 +23,26 @@ public class CarburantController {
     CarburantService carburantService;
 
     @GetMapping("/Carburants")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Carburant>> getAllCarburants() {
         List<Carburant> carburant = carburantService.getAllCarburants();
         return new ResponseEntity<>(carburant, OK);
     }
 
     @PostMapping("/AjouterCarburant")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Carburant AjouterCarburant(@RequestBody Carburant c) {
         return carburantService.saveCarburant(c);
     }
 
     @PutMapping("/ModifierCarburant")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public Carburant ModifierCarburant(@RequestBody Carburant c) {
         return carburantService.updateCarburant(c);
     }
 
     @DeleteMapping("SupprimerCarburantById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerCarburantById(@PathVariable("id") String numeroCarte) {
         carburantService.deleteCarburantById(numeroCarte);
     }
@@ -50,4 +53,5 @@ public class CarburantController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
+
 }

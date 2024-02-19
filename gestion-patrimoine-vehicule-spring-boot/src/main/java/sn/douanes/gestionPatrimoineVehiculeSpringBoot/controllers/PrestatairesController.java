@@ -7,6 +7,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.Prestataires;
@@ -31,6 +33,7 @@ public class PrestatairesController {
 
 
     @GetMapping("/Prestataires")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<Prestataires>> getAllPrestataires() {
 
         // METHODE 1
@@ -60,7 +63,7 @@ public class PrestatairesController {
     }
 
     @PostMapping("/AjouterPrestataires")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<?> AjouterPrestataires(@RequestBody Prestataires prestataires) throws PrestatairesExistException {
         // Assurez-vous que SecteurActivite n'est pas null pour éviter la NullPointerException
 //        if (prestataires.getSecteurActivite() != null) {
@@ -127,6 +130,7 @@ public class PrestatairesController {
 
 
     @PostMapping("/AjouterRequestParamPrestataires")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Prestataires> ajouterPrestataires (
             @RequestParam("ninea") String ninea,
             @RequestParam("raisonSociale") String raisonSociale,
@@ -142,7 +146,8 @@ public class PrestatairesController {
 
 
     @PutMapping("/ModifierPrestataires")
-    @ResponseBody
+    // @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
+    @PostAuthorize("hasAuthority('ADMINISTRATEUR')")
     public ResponseEntity<Prestataires> ModifierPrestataires(@RequestBody Prestataires prestataires) throws PrestatairesNotFoundException {
 
         Prestataires updatePrestataires = prestatairesService.updatePrestataires(prestataires);
@@ -151,6 +156,7 @@ public class PrestatairesController {
     }
 
     @DeleteMapping("SupprimerPrestatairesById/{ninea}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<HttpResponse> SupprimerPrestatairesById(@PathVariable("ninea") String ninea) {
 
         prestatairesService.deletePrestatairesById(ninea);

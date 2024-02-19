@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.ChangementPiece;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
@@ -22,24 +23,26 @@ public class ChangementPieceController {
     ChangementPieceService changementPieceService;
 
     @GetMapping("/ChangementPieces")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<ChangementPiece>> getAllChangementPieces() {
         List<ChangementPiece> changementPiece = changementPieceService.getAllChangementPieces();
         return new ResponseEntity<>(changementPiece, OK);
     }
 
     @PostMapping("/AjouterChangementPiece")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ChangementPiece AjouterChangementPiece(@RequestBody ChangementPiece c) {
         return changementPieceService.saveChangementPiece(c);
     }
 
     @PutMapping("/ModifierChangementPiece")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ChangementPiece ModifierChangementPiece(@RequestBody ChangementPiece c) {
         return changementPieceService.updateChangementPiece(c);
     }
 
     @DeleteMapping("SupprimerChangementPieceById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerChangementPieceById(@PathVariable("id") String numeroImmatriculation) {
         changementPieceService.deleteChangementPieceById(numeroImmatriculation );
     }

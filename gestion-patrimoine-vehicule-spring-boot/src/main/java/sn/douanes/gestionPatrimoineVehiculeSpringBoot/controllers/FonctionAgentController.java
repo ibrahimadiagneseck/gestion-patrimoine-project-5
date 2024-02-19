@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.FonctionAgent;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.HttpResponse;
@@ -23,18 +24,20 @@ public class FonctionAgentController {
 
 
     @GetMapping("/FonctionAgents")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<FonctionAgent>> getAllFonctionAgents() {
         List<FonctionAgent> fonctionAgent = fonctionAgentService.getAllFonctionAgents();
         return new ResponseEntity<>(fonctionAgent, OK);
     }
 
     @PostMapping("/AjouterFonctionAgent")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public FonctionAgent AjouterFonctionAgent(@RequestBody FonctionAgent fonctionAgent) {
         return fonctionAgentService.saveFonctionAgent(fonctionAgent);
     }
 
     @PostMapping("/AjouterRequestParamFonctionAgent")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<FonctionAgent> ajouterFonctionAgent (
             @RequestParam("codeFonctionAgent") String codeFonctionAgent,
             @RequestParam("libelleFonctionAgent") String libelleFonctionAgent
@@ -44,12 +47,13 @@ public class FonctionAgentController {
     }
 
     @PutMapping("/ModifierFonctionAgent")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public FonctionAgent ModifierFonctionAgent(@RequestBody FonctionAgent f) {
         return fonctionAgentService.updateFonctionAgent(f);
     }
 
     @DeleteMapping("SupprimerFonctionAgentById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerFonctionAgentById(@PathVariable("id") String codeFonctionAgent) {
         fonctionAgentService.deleteFonctionAgentById(codeFonctionAgent);
     }
@@ -59,6 +63,5 @@ public class FonctionAgentController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
-
 
 }

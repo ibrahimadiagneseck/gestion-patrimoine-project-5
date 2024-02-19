@@ -3,6 +3,7 @@ package sn.douanes.gestionPatrimoineVehiculeSpringBoot.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.DotationVehiculeService;
@@ -23,6 +24,7 @@ public class DotationVehiculeController {
 
 
     @GetMapping("/DotationVehicules")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<DotationVehicule>> getAllDotationVehicules() {
         List<DotationVehicule> dotationVehicule = dotationVehiculeService.getAllDotationVehicules();
         return new ResponseEntity<>(dotationVehicule, OK);
@@ -30,7 +32,7 @@ public class DotationVehiculeController {
 
 
     @PostMapping("/AjouterDotationVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public DotationVehicule AjouterDotationVehicule(@RequestBody DotationVehicule dotationVehicule) {
         // return DotationVehiculeService.saveDotationVehicule(dotationVehicule);
         return dotationVehiculeService.ajouterDotationVehicule(dotationVehicule.getIdentifiantBS(), dotationVehicule.getMatriculeAgent(),dotationVehicule.getVehiculeDotation());
@@ -53,12 +55,13 @@ public class DotationVehiculeController {
 
 
     @PutMapping("/ModifierDotationVehicule")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public DotationVehicule ModifierDotationVehicule(@RequestBody DotationVehicule d) {
         return dotationVehiculeService.updateDotationVehicule(d);
     }
 
     @DeleteMapping("SupprimerDotationVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerDotationVehiculeById(@PathVariable("id") String identifiantDV) {
 
         dotationVehiculeService.deleteDotationVehiculeById(identifiantDV);
@@ -67,6 +70,7 @@ public class DotationVehiculeController {
 
 
     @GetMapping("RecupererDotationVehiculeById/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public DotationVehicule RecupererDotationVehiculeById(
             @PathVariable("id") String identifiantDV) {
 
@@ -78,4 +82,5 @@ public class DotationVehiculeController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus
         );
     }
+
 }

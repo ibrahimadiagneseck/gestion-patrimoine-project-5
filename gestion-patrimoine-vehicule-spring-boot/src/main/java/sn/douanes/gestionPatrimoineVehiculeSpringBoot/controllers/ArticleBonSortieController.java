@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.entities.*;
 import sn.douanes.gestionPatrimoineVehiculeSpringBoot.services.ArticleBonSortieService;
@@ -22,13 +23,14 @@ public class ArticleBonSortieController {
 
 
     @GetMapping("/ArticleBonSorties")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ResponseEntity<List<ArticleBonSortie>> getAllArticleBonSorties() {
         List<ArticleBonSortie> articleBonSortie = articleBonSortieService.getAllArticleBonSorties();
         return new ResponseEntity<>(articleBonSortie, OK);
     }
 
     @PostMapping("/AjouterArticleBonSortie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public String  AjouterArticleBonEntree(@RequestBody ArticleBonSortie articleBonSortie) {
 
         //return articleBonSortieService.ajouterArticleBonSortie(articleBonSortie.getIdentifiantBS(), articleBonSortie.getCodeArticleBonSortie(), articleBonSortie.getLibelleArticleBonSortie(), articleBonSortie.getQuantiteAccordee(),  articleBonSortie.getMatriculeAgent());
@@ -38,19 +40,19 @@ public class ArticleBonSortieController {
 
 
     @PutMapping("/ModifierArticleBonSortie")
-    @ResponseBody
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public ArticleBonSortie ModifierArticleBonSortie(@RequestBody ArticleBonSortie a) {
         return articleBonSortieService.updateArticleBonSortie(a);
     }
 
     @DeleteMapping("SupprimerArticleBonSortieById/{codeArticleBonSortie}/{identifiantBS}")
+    @PreAuthorize("hasAnyAuthority('ADMINISTRATEUR')")
     public void SupprimerArticleBonSortie(
             @PathVariable("codeArticleBonSorties") String codeArticleBonSortie,
             @PathVariable("identifiantBS") BonDeSortie identifiantBS
     ) {
         articleBonSortieService.deleteArticleBonSortieById(codeArticleBonSortie, identifiantBS);
     }
-
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(
