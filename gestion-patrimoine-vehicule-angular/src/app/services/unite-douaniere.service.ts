@@ -68,11 +68,11 @@ export class UniteDouaniereService {
   }
 
   public ajouterUniteDouaniere(formData: FormData): Observable<UniteDouaniere> {
-    return this.httpClient.post<UniteDouaniere>(`${this.urlServeur}/AjouterUniteDouaniere`, formData);
+    return this.httpClient.post<UniteDouaniere>(`${this.urlServeur}/AjouterUniteDouaniere`, formData, { withCredentials: true });
   }
 
   public modifierUniteDouaniere(formData: FormData): Observable<UniteDouaniere> {
-    return this.httpClient.put<UniteDouaniere>(`${this.urlServeur}/ModifierUniteDouaniere`, formData);
+    return this.httpClient.put<UniteDouaniere>(`${this.urlServeur}/ModifierUniteDouaniere`, formData, { withCredentials: true });
   }
 
   public supprimerUniteDouaniere(codeUniteDouaniere: string): Observable<CustomHttpRespone> {

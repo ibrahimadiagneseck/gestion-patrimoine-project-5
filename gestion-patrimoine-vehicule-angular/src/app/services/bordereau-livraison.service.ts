@@ -24,15 +24,15 @@ export class BordereauLivraisonService {
   }
 
   public ajouterBordereauLivraison(bordereauLivraison: BordereauLivraison): Observable<BordereauLivraison> {
-    return this.httpClient.post<BordereauLivraison>(`${this.urlServeur}/AjouterBordereauLivraison`, bordereauLivraison);
+    return this.httpClient.post<BordereauLivraison>(`${this.urlServeur}/AjouterBordereauLivraison`, bordereauLivraison, { withCredentials: true });
   }
 
   public ajouterBordereauLivraisonRequestParam(formData: FormData): Observable<BordereauLivraison> {
-    return this.httpClient.post<BordereauLivraison>(`${this.urlServeur}/AjouterRequestParamBordereauLivraison`, formData);
+    return this.httpClient.post<BordereauLivraison>(`${this.urlServeur}/AjouterRequestParamBordereauLivraison`, formData, { withCredentials: true });
   }
 
   public modifierBordereauLivraison(bordereauLivraison: BordereauLivraison): Observable<BordereauLivraison> {
-    return this.httpClient.put<BordereauLivraison>(`${this.urlServeur}/ModifierBordereauLivraison`, bordereauLivraison);
+    return this.httpClient.put<BordereauLivraison>(`${this.urlServeur}/ModifierBordereauLivraison`, bordereauLivraison, { withCredentials: true });
   }
 
 

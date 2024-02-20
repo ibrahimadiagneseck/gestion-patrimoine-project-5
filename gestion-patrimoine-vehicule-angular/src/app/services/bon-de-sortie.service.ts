@@ -73,7 +73,7 @@ export class BonDeSortieService {
   }
 
   public ajouterBonDeSortie(BonDeSortie: BonDeSortie): Observable<BonDeSortie> {
-    return this.httpClient.post<BonDeSortie>(`${this.urlServeur}/AjouterBonDeSortie`, BonDeSortie);
+    return this.httpClient.post<BonDeSortie>(`${this.urlServeur}/AjouterBonDeSortie`, BonDeSortie, { withCredentials: true });
   }
 
   // public ajouterBonDeSortieRequestParam(formData: FormData): Observable<BonDeSortie> {
@@ -81,7 +81,7 @@ export class BonDeSortieService {
   // }
 
   public modifierBonDeSortie(bonDeSortie: BonDeSortie): Observable<BonDeSortie> {
-    return this.httpClient.put<BonDeSortie>(`${this.urlServeur}/ModifierBonDeSortie`, bonDeSortie);
+    return this.httpClient.put<BonDeSortie>(`${this.urlServeur}/ModifierBonDeSortie`, bonDeSortie, { withCredentials: true });
   }
 
   public supprimerBonDeSortieById(identifiantBE: string): Observable<CustomHttpRespone> {

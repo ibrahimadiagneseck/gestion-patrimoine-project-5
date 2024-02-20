@@ -24,11 +24,11 @@ export class PaysService {
   }
 
   public ajouterPays(formData: FormData): Observable<Pays> {
-    return this.httpClient.post<Pays>(`${this.urlServeur}/AjouterPays`, formData);
+    return this.httpClient.post<Pays>(`${this.urlServeur}/AjouterPays`, formData, { withCredentials: true });
   }
 
   public modifierPays(formData: FormData): Observable<Pays> {
-    return this.httpClient.put<Pays>(`${this.urlServeur}/ModifierPays`, formData);
+    return this.httpClient.put<Pays>(`${this.urlServeur}/ModifierPays`, formData, { withCredentials: true });
   }
 
   public supprimerPays(codePays: string): Observable<CustomHttpRespone> {

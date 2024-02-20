@@ -74,7 +74,7 @@ export class DotationVehiculeService {
   }
 
   public ajouterDotationVehicule(dotationVehicule: DotationVehicule): Observable<DotationVehicule> {
-    return this.httpClient.post<DotationVehicule>(`${this.urlServeur}/AjouterDotationVehicule`, dotationVehicule);
+    return this.httpClient.post<DotationVehicule>(`${this.urlServeur}/AjouterDotationVehicule`, dotationVehicule, { withCredentials: true });
   }
 
   // public ajouterDotationVehiculeRequestParam(formData: FormData): Observable<DotationVehicule> {
@@ -82,7 +82,7 @@ export class DotationVehiculeService {
   // }
 
   public modifierDotationVehicule(dotationVehicule: DotationVehicule): Observable<DotationVehicule> {
-    return this.httpClient.put<DotationVehicule>(`${this.urlServeur}/ModifierDotationVehicule`, dotationVehicule);
+    return this.httpClient.put<DotationVehicule>(`${this.urlServeur}/ModifierDotationVehicule`, dotationVehicule, { withCredentials: true });
   }
 
   public supprimerDotationVehiculeById(identifiantDV: string): Observable<CustomHttpRespone> {

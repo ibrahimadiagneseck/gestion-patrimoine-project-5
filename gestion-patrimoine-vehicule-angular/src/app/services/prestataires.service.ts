@@ -71,7 +71,7 @@ export class PrestatairesService {
   }
 
   public ajouterPrestataires(prestataires: Prestataires): Observable<Prestataires> {
-    return this.httpClient.post<Prestataires>(`${this.urlServeur}/AjouterPrestataires`, prestataires);
+    return this.httpClient.post<Prestataires>(`${this.urlServeur}/AjouterPrestataires`, prestataires, { withCredentials: true });
   }
 
   // public ajouterPrestatairesRequestParam(formData: FormData): Observable<Prestataires> {
@@ -79,7 +79,7 @@ export class PrestatairesService {
   // }
 
   public modifierPrestataires(prestataires: Prestataires): Observable<Prestataires> {
-    return this.httpClient.put<Prestataires>(`${this.urlServeur}/ModifierPrestataires`, prestataires);
+    return this.httpClient.put<Prestataires>(`${this.urlServeur}/ModifierPrestataires`, prestataires, { withCredentials: true });
   }
   
 

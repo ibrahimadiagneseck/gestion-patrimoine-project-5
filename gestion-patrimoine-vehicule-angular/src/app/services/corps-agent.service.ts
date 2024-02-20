@@ -24,11 +24,11 @@ export class CorpsAgentService {
   }
 
   public ajouterCorpsAgent(formData: FormData): Observable<CorpsAgent> {
-    return this.httpClient.post<CorpsAgent>(`${this.urlServeur}/AjouterCorpsAgent`, formData);
+    return this.httpClient.post<CorpsAgent>(`${this.urlServeur}/AjouterCorpsAgent`, formData, { withCredentials: true });
   }
 
   public modifierCorpsAgent(formData: FormData): Observable<CorpsAgent> {
-    return this.httpClient.put<CorpsAgent>(`${this.urlServeur}/ModifierCorpsAgent`, formData);
+    return this.httpClient.put<CorpsAgent>(`${this.urlServeur}/ModifierCorpsAgent`, formData, { withCredentials: true });
   }
 
   public supprimerCorpsAgent(codeCorpsAgent: string): Observable<CustomHttpRespone> {

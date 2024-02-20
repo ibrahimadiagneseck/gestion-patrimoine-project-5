@@ -72,7 +72,7 @@ export class BonPourService {
   }
 
   public ajouterBonPour(bonPour: BonPour): Observable<BonPour> {
-    return this.httpClient.post<BonPour>(`${this.urlServeur}/AjouterBonPour`, bonPour);
+    return this.httpClient.post<BonPour>(`${this.urlServeur}/AjouterBonPour`, bonPour, { withCredentials: true });
   }
 
   // public ajouterBonPourRequestParam(formData: FormData): Observable<BonPour> {
@@ -80,7 +80,7 @@ export class BonPourService {
   // }
 
   public modifierBonPour(bonPour: BonPour): Observable<BonPour> {
-    return this.httpClient.put<BonPour>(`${this.urlServeur}/ModifierBonPour`, bonPour);
+    return this.httpClient.put<BonPour>(`${this.urlServeur}/ModifierBonPour`, bonPour, { withCredentials: true });
   }
 
   public supprimerBonPourById(identifiantBP: string): Observable<CustomHttpRespone> {

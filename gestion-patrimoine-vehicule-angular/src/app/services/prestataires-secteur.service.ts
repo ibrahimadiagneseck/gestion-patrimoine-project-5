@@ -72,7 +72,7 @@ export class PrestatairesSecteurService {
   }
 
   public ajouterPrestatairesSecteur(prestatairesSecteur: PrestatairesSecteur): Observable<PrestatairesSecteur> {
-    return this.httpClient.post<PrestatairesSecteur>(`${this.urlServeur}/AjouterPrestatairesSecteur`, prestatairesSecteur);
+    return this.httpClient.post<PrestatairesSecteur>(`${this.urlServeur}/AjouterPrestatairesSecteur`, prestatairesSecteur, { withCredentials: true });
   }
 
   // public ajouterPrestatairesSecteurRequestParam(formData: FormData): Observable<PrestatairesSecteur> {
@@ -80,7 +80,7 @@ export class PrestatairesSecteurService {
   // }
 
   public modifierPrestatairesSecteur(prestatairesSecteur: PrestatairesSecteur): Observable<PrestatairesSecteur> {
-    return this.httpClient.put<PrestatairesSecteur>(`${this.urlServeur}/ModifierPrestatairesSecteur`, prestatairesSecteur);
+    return this.httpClient.put<PrestatairesSecteur>(`${this.urlServeur}/ModifierPrestatairesSecteur`, prestatairesSecteur, { withCredentials: true });
   }
   
 

@@ -24,11 +24,11 @@ export class MarqueVehiculeService {
   }
 
   public ajouterMarqueVehicule(formData: FormData): Observable<MarqueVehicule> {
-    return this.httpClient.post<MarqueVehicule>(`${this.urlServeur}/AjouterMarqueVehicule`, formData);
+    return this.httpClient.post<MarqueVehicule>(`${this.urlServeur}/AjouterMarqueVehicule`, formData, { withCredentials: true });
   }
 
   public modifierMarqueVehicule(formData: FormData): Observable<MarqueVehicule> {
-    return this.httpClient.put<MarqueVehicule>(`${this.urlServeur}/ModifierMarqueVehicule`, formData);
+    return this.httpClient.put<MarqueVehicule>(`${this.urlServeur}/ModifierMarqueVehicule`, formData, { withCredentials: true });
   }
 
   public supprimerMarqueVehicule(codeMarque: string): Observable<CustomHttpRespone> {

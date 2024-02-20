@@ -76,7 +76,7 @@ export class ArticleBonSortieService {
   }
 
   public ajouterArticleBonSortie(articleBonSortie: ArticleBonSortie): Observable<string> {
-    return this.httpClient.post<string>(`${this.urlServeur}/AjouterArticleBonSortie`, articleBonSortie);
+    return this.httpClient.post<string>(`${this.urlServeur}/AjouterArticleBonSortie`, articleBonSortie, { withCredentials: true });
   }
 
   // public ajouterArticleBonSortieRequestParam(formData: FormData): Observable<ArticleBonSortie> {
@@ -84,7 +84,7 @@ export class ArticleBonSortieService {
   // }
 
   public modifierArticleBonSortie(articleBonSortie: ArticleBonSortie): Observable<ArticleBonSortie> {
-    return this.httpClient.put<ArticleBonSortie>(`${this.urlServeur}/ModifierArticleBonSortie`, articleBonSortie);
+    return this.httpClient.put<ArticleBonSortie>(`${this.urlServeur}/ModifierArticleBonSortie`, articleBonSortie, { withCredentials: true });
   }
 
   public supprimerArticleBonSortie(codeArticleBonSortie: string, identifiantBS: BonDeSortie): Observable<CustomHttpRespone> {

@@ -72,15 +72,15 @@ export class BonEntreeService {
   }
 
   public ajouterBonEntree(bonEntree: BonEntree): Observable<BonEntree> {
-    return this.httpClient.post<BonEntree>(`${this.urlServeur}/AjouterBonEntree`, bonEntree);
+    return this.httpClient.post<BonEntree>(`${this.urlServeur}/AjouterBonEntree`, bonEntree, { withCredentials: true });
   }
 
   public ajouterBonEntreeRequestParam(formData: FormData): Observable<BonEntree> {
-    return this.httpClient.post<BonEntree>(`${this.urlServeur}/AjouterRequestParamBonEntree`, formData);
+    return this.httpClient.post<BonEntree>(`${this.urlServeur}/AjouterRequestParamBonEntree`, formData, { withCredentials: true });
   }
 
   public modifierBonEntree(formData: FormData): Observable<BonEntree> {
-    return this.httpClient.put<BonEntree>(`${this.urlServeur}/ModifierBonEntree`, formData);
+    return this.httpClient.put<BonEntree>(`${this.urlServeur}/ModifierBonEntree`, formData, { withCredentials: true });
   }
 
   public supprimerBonEntreeById(identifiantBE: string): Observable<CustomHttpRespone> {

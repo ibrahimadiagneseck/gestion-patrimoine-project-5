@@ -24,11 +24,11 @@ export class EtatVehiculeService {
   }
 
   public ajouterEtatVehicule(formData: FormData): Observable<EtatVehicule> {
-    return this.httpClient.post<EtatVehicule>(`${this.urlServeur}/AjouterEtatVehicule`, formData);
+    return this.httpClient.post<EtatVehicule>(`${this.urlServeur}/AjouterEtatVehicule`, formData, { withCredentials: true });
   }
 
   public modifierEtatVehicule(formData: FormData): Observable<EtatVehicule> {
-    return this.httpClient.put<EtatVehicule>(`${this.urlServeur}/ModifierEtatVehicule`, formData);
+    return this.httpClient.put<EtatVehicule>(`${this.urlServeur}/ModifierEtatVehicule`, formData, { withCredentials: true });
   }
 
   public supprimerEtatVehicule(codeMarque: string): Observable<CustomHttpRespone> {

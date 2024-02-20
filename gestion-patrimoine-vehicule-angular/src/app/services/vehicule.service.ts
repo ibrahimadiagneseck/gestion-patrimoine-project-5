@@ -72,15 +72,15 @@ export class VehiculeService {
   }
 
   public ajouterVehicule(vehicule: Vehicule): Observable<Vehicule> {
-    return this.httpClient.post<Vehicule>(`${this.urlServeur}/AjouterVehicule`, vehicule);
+    return this.httpClient.post<Vehicule>(`${this.urlServeur}/AjouterVehicule`, vehicule, { withCredentials: true });
   }
 
   public ajouterVehiculeRequestParam(formData: FormData): Observable<Vehicule> {
-    return this.httpClient.post<Vehicule>(`${this.urlServeur}/AjouterRequestParamVehicule`, formData);
+    return this.httpClient.post<Vehicule>(`${this.urlServeur}/AjouterRequestParamVehicule`, formData, { withCredentials: true });
   }
 
   public modifierVehicule(formData: FormData): Observable<Vehicule> {
-    return this.httpClient.put<Vehicule>(`${this.urlServeur}/ModifierVehicule`, formData);
+    return this.httpClient.put<Vehicule>(`${this.urlServeur}/ModifierVehicule`, formData, { withCredentials: true });
   }
 
   public supprimerVehiculeById(numeroSerie: string): Observable<CustomHttpRespone> {

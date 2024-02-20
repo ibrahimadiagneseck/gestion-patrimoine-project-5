@@ -26,15 +26,15 @@ export class TypeObjetService {
   }
 
   public ajouterTypeObjet(typeObjet: TypeObjet): Observable<TypeObjet> {
-    return this.httpClient.post<TypeObjet>(`${this.urlServeur}/AjouterTypeObjet`, typeObjet);
+    return this.httpClient.post<TypeObjet>(`${this.urlServeur}/AjouterTypeObjet`, typeObjet, { withCredentials: true });
   }
 
   public ajouterTypeObjetRequestParam(formData: FormData): Observable<TypeObjet> {
-    return this.httpClient.post<TypeObjet>(`${this.urlServeur}/AjouterRequestParamTypeObjet`, formData);
+    return this.httpClient.post<TypeObjet>(`${this.urlServeur}/AjouterRequestParamTypeObjet`, formData, { withCredentials: true });
   }
 
   public modifierTypeObjet(formData: FormData): Observable<TypeObjet> {
-    return this.httpClient.put<TypeObjet>(`${this.urlServeur}/ModifierTypeObjet`, formData);
+    return this.httpClient.put<TypeObjet>(`${this.urlServeur}/ModifierTypeObjet`, formData, { withCredentials: true });
   }
 
   public supprimerTypeObjet(codeTypeObjet: string): Observable<CustomHttpRespone> {

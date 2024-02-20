@@ -25,11 +25,11 @@ export class UniteDouaniereSectionsService {
   }
 
   public ajouterUniteDouaniereSections(formData: FormData): Observable<UniteDouaniereSections> {
-    return this.httpClient.post<UniteDouaniereSections>(`${this.urlServeur}/AjouterUniteDouaniereSections`, formData);
+    return this.httpClient.post<UniteDouaniereSections>(`${this.urlServeur}/AjouterUniteDouaniereSections`, formData, { withCredentials: true });
   }
 
   public modifierUniteDouaniereSections(formData: FormData): Observable<UniteDouaniereSections> {
-    return this.httpClient.put<UniteDouaniereSections>(`${this.urlServeur}/ModifierUniteDouaniereSections`, formData);
+    return this.httpClient.put<UniteDouaniereSections>(`${this.urlServeur}/ModifierUniteDouaniereSections`, formData, { withCredentials: true });
   }
 
   public supprimerUniteDouaniereSections(codeUniteDouaniereSections: string, codeSection: Sections): Observable<CustomHttpRespone> {

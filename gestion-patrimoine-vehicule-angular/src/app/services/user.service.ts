@@ -68,12 +68,12 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.urlServeur}/Users`);
   }
 
-  public ajouterUser(Users: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.urlServeur}/AjouterUsers`, Users);
+  public ajouterUser(users: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.urlServeur}/AjouterUsers`, users, { withCredentials: true });
   }
 
   public modifierUser(formData: FormData): Observable<User> {
-    return this.httpClient.post<User>(`${this.urlServeur}/ModifierUsers`, formData);
+    return this.httpClient.post<User>(`${this.urlServeur}/ModifierUsers`, formData, { withCredentials: true });
   }
 
   public supprimerUserById(ninea: string): Observable<CustomHttpRespone> {

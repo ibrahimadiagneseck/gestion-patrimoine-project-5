@@ -25,7 +25,7 @@ export class LieuStockageVehiculeService {
   }
 
   public ajouterLieuStockageVehicule(lieuStockageVehicule: LieuStockageVehicule): Observable<LieuStockageVehicule> {
-    return this.httpClient.post<LieuStockageVehicule>(`${this.urlServeur}/AjouterLieuStockageVehicule`, lieuStockageVehicule);
+    return this.httpClient.post<LieuStockageVehicule>(`${this.urlServeur}/AjouterLieuStockageVehicule`, lieuStockageVehicule, { withCredentials: true });
   }
 
   // public ajouterTypeEnergieRequestParam(formData: FormData): Observable<TypeEnergie> {
@@ -33,7 +33,7 @@ export class LieuStockageVehiculeService {
   // }
 
   public modifierLieuStockageVehicule(formData: FormData): Observable<LieuStockageVehicule> {
-    return this.httpClient.put<LieuStockageVehicule>(`${this.urlServeur}/ModifierLieuStockageVehicule`, formData);
+    return this.httpClient.put<LieuStockageVehicule>(`${this.urlServeur}/ModifierLieuStockageVehicule`, formData, { withCredentials: true });
   }
 
   public supprimerLieuStockageVehicule(codeLieuVH: string): Observable<CustomHttpRespone> {

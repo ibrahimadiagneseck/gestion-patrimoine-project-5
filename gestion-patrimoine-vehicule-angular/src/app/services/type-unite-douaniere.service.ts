@@ -26,11 +26,11 @@ export class TypeUniteDouaniereService {
   }
 
   public ajouterTypeUniteDouaniere(formData: FormData): Observable<TypeUniteDouaniere> {
-    return this.httpClient.post<TypeUniteDouaniere>(`${this.urlServeur}/AjouterTypeUniteDouaniere`, formData);
+    return this.httpClient.post<TypeUniteDouaniere>(`${this.urlServeur}/AjouterTypeUniteDouaniere`, formData, { withCredentials: true });
   }
 
   public modifierTypeUniteDouaniere(formData: FormData): Observable<TypeUniteDouaniere> {
-    return this.httpClient.put<TypeUniteDouaniere>(`${this.urlServeur}/ModifierTypeUniteDouaniere`, formData);
+    return this.httpClient.put<TypeUniteDouaniere>(`${this.urlServeur}/ModifierTypeUniteDouaniere`, formData, { withCredentials: true });
   }
 
   public supprimerTypeUniteDouaniere(codeTypeUniteDouaniere: string): Observable<CustomHttpRespone> {

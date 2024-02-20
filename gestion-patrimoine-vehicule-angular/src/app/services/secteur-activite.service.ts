@@ -25,7 +25,7 @@ export class SecteurActiviteService {
   }
 
   public ajouterSecteurActivite(secteurActivite: SecteurActivite): Observable<SecteurActivite> {
-    return this.httpClient.post<SecteurActivite>(`${this.urlServeur}/AjouterSecteurActivite`, secteurActivite);
+    return this.httpClient.post<SecteurActivite>(`${this.urlServeur}/AjouterSecteurActivite`, secteurActivite, { withCredentials: true });
   }
 
   // public ajouterSecteurActiviteRequestParam(formData: FormData): Observable<SecteurActivite> {
@@ -33,7 +33,7 @@ export class SecteurActiviteService {
   // }
 
   public modifierSecteurActivite(secteurActivite: SecteurActivite): Observable<SecteurActivite> {
-    return this.httpClient.put<SecteurActivite>(`${this.urlServeur}/ModifierSecteurActivite`, secteurActivite);
+    return this.httpClient.put<SecteurActivite>(`${this.urlServeur}/ModifierSecteurActivite`, secteurActivite, { withCredentials: true });
   }
 
   public supprimerSecteurActiviteById(identifiantBL: string): Observable<CustomHttpRespone> {

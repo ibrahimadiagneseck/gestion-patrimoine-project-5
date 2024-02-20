@@ -22,11 +22,11 @@ export class AuthorityService {
   }
 
   public ajouterAuthority(authority: Authority): Observable<Authority> {
-    return this.httpClient.post<Authority>(`${this.urlServeur}/AjouterAuthority`, authority);
+    return this.httpClient.post<Authority>(`${this.urlServeur}/AjouterAuthority`, authority, { withCredentials: true });
   }
 
   public modifierAuthority(authority: Authority): Observable<Authority> {
-    return this.httpClient.post<Authority>(`${this.urlServeur}/ModifierAuthority`, authority);
+    return this.httpClient.post<Authority>(`${this.urlServeur}/ModifierAuthority`, authority, { withCredentials: true });
   }
 
   public supprimerAuthorityById(authorityId: string): Observable<CustomHttpRespone> {

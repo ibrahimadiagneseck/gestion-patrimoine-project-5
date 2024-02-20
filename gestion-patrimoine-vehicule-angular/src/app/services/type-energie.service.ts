@@ -25,15 +25,15 @@ export class TypeEnergieService {
   }
 
   public ajouterTypeEnergie(typeEnergie: TypeEnergie): Observable<TypeEnergie> {
-    return this.httpClient.post<TypeEnergie>(`${this.urlServeur}/AjouterTypeEnergie`, typeEnergie);
+    return this.httpClient.post<TypeEnergie>(`${this.urlServeur}/AjouterTypeEnergie`, typeEnergie, { withCredentials: true });
   }
 
   public ajouterTypeEnergieRequestParam(formData: FormData): Observable<TypeEnergie> {
-    return this.httpClient.post<TypeEnergie>(`${this.urlServeur}/AjouterRequestParamTypeEnergie`, formData);
+    return this.httpClient.post<TypeEnergie>(`${this.urlServeur}/AjouterRequestParamTypeEnergie`, formData, { withCredentials: true });
   }
 
   public modifierTypeEnergie(formData: FormData): Observable<TypeEnergie> {
-    return this.httpClient.put<TypeEnergie>(`${this.urlServeur}/ModifierTypeEnergie`, formData);
+    return this.httpClient.put<TypeEnergie>(`${this.urlServeur}/ModifierTypeEnergie`, formData, { withCredentials: true });
   }
 
   public supprimerTypeEnergie(codeTypeEnergie: string): Observable<CustomHttpRespone> {

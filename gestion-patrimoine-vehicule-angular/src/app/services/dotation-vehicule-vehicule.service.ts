@@ -72,7 +72,7 @@ export class DotationVehiculeVehiculeService {
   }
 
   public ajouterDotationVehiculeVehicule(dotationVehiculeVehicule: DotationVehiculeVehicule): Observable<DotationVehiculeVehicule> {
-    return this.httpClient.post<DotationVehiculeVehicule>(`${this.urlServeur}/AjouterDotationVehiculeVehicule`, dotationVehiculeVehicule);
+    return this.httpClient.post<DotationVehiculeVehicule>(`${this.urlServeur}/AjouterDotationVehiculeVehicule`, dotationVehiculeVehicule, { withCredentials: true });
   }
 
   // public ajouterPrestatairesSecteurRequestParam(formData: FormData): Observable<PrestatairesSecteur> {
@@ -80,7 +80,7 @@ export class DotationVehiculeVehiculeService {
   // }
 
   public modifierDotationVehiculeVehicule(dotationVehiculeVehicule: DotationVehiculeVehicule): Observable<DotationVehiculeVehicule> {
-    return this.httpClient.put<DotationVehiculeVehicule>(`${this.urlServeur}/ModifierDotationVehiculeVehicule`, dotationVehiculeVehicule);
+    return this.httpClient.put<DotationVehiculeVehicule>(`${this.urlServeur}/ModifierDotationVehiculeVehicule`, dotationVehiculeVehicule, { withCredentials: true });
   }
 
 

@@ -24,11 +24,11 @@ export class SectionsService {
   }
 
   public ajouterSections(formData: FormData): Observable<Sections> {
-    return this.httpClient.post<Sections>(`${this.urlServeur}/AjouterSections`, formData);
+    return this.httpClient.post<Sections>(`${this.urlServeur}/AjouterSections`, formData, { withCredentials: true });
   }
 
   public modifierSections(formData: FormData): Observable<Sections> {
-    return this.httpClient.put<Sections>(`${this.urlServeur}/ModifierSections`, formData);
+    return this.httpClient.put<Sections>(`${this.urlServeur}/ModifierSections`, formData, { withCredentials: true });
   }
 
   public supprimerSections(codeSection: string): Observable<CustomHttpRespone> {

@@ -24,11 +24,11 @@ export class FonctionAgentService {
   }
 
   public ajouterFonctionAgent(formData: FormData): Observable<FonctionAgent> {
-    return this.httpClient.post<FonctionAgent>(`${this.urlServeur}/AjouterFonctionAgent`, formData);
+    return this.httpClient.post<FonctionAgent>(`${this.urlServeur}/AjouterFonctionAgent`, formData, { withCredentials: true });
   }
 
   public modifierFonctionAgent(formData: FormData): Observable<FonctionAgent> {
-    return this.httpClient.put<FonctionAgent>(`${this.urlServeur}/ModifierFonctionAgent`, formData);
+    return this.httpClient.put<FonctionAgent>(`${this.urlServeur}/ModifierFonctionAgent`, formData, { withCredentials: true });
   }
 
   public supprimerFonctionAgent(codeFonctionAgent: string): Observable<CustomHttpRespone> {

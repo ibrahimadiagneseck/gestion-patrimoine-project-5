@@ -23,15 +23,15 @@ export class AgentService {
   }
 
   public ajouterAgent(agent: Agent): Observable<Agent> {
-    return this.httpClient.post<Agent>(`${this.urlServeur}/AjouterAgent`, agent);
+    return this.httpClient.post<Agent>(`${this.urlServeur}/AjouterAgent`, agent, { withCredentials: true });
   }
   
   public ajouterAgentRequestParam(formData: FormData): Observable<Agent> {
-    return this.httpClient.post<Agent>(`${this.urlServeur}/AjouterRequestParamAgent`, formData);
+    return this.httpClient.post<Agent>(`${this.urlServeur}/AjouterRequestParamAgent`, formData, { withCredentials: true });
   }
 
   public modifierAgent(formData: FormData): Observable<Agent> {
-    return this.httpClient.post<Agent>(`${this.urlServeur}/ModifierAgent`, formData);
+    return this.httpClient.post<Agent>(`${this.urlServeur}/ModifierAgent`, formData, { withCredentials: true });
   }
 
   public supprimerAgent(matriculeAgentCodeCorpsAgent: string): Observable<CustomHttpRespone> {

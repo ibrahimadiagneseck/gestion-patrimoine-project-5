@@ -27,11 +27,11 @@ export class TypeVehiculeService {
   }
 
   public ajouterTypeVehicule(formData: FormData): Observable<TypeVehicule> {
-    return this.httpClient.post<TypeVehicule>(`${this.urlServeur}/AjouterTypeVehicule`, formData);
+    return this.httpClient.post<TypeVehicule>(`${this.urlServeur}/AjouterTypeVehicule`, formData, { withCredentials: true });
   }
 
   public modifierTypeVehicule(formData: FormData): Observable<TypeVehicule> {
-    return this.httpClient.put<TypeVehicule>(`${this.urlServeur}/ModifierTypeVehicule`, formData);
+    return this.httpClient.put<TypeVehicule>(`${this.urlServeur}/ModifierTypeVehicule`, formData, { withCredentials: true });
   }
 
   public supprimerTypeVehicule(codeTypeVehicule: string): Observable<CustomHttpRespone> {
